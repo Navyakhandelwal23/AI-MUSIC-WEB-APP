@@ -1,4 +1,5 @@
 song=""
+song2=""
 
 leftwristx= 0
 leftwristy= 0
@@ -7,6 +8,9 @@ rightwristy= 0
 
 scoreleftwrist= 0
 scorerightwrist=0
+song1_status= ""
+song2_status=""
+
 
 function preload(){
     song= loadSound("music.mp3")
@@ -30,6 +34,8 @@ function setup(){
 
 function draw(){
     image(video,0,0,600,400)
+    song1_status= song.isPlaying()
+    song2_status= song2.isPlaying()
     if(scorerightwrist>0.2){
         fill("blue")
         stroke("blue")
@@ -75,11 +81,11 @@ function draw(){
     fill("red")
     stroke("red")
     circle(leftwristx,leftwristy,20)
-    isnumber= Number(leftwristy)
-    remove_decimal= floor(isnumber)
-    volume= remove_decimal/500
-    document.getElementById("volume").innerHTML= "volume="+volume
-    song.setVolume(volume)
+   song.stop()
+   if(song2_status==false){
+        song2.play()
+        document.getElementById("song_name").innerHTML= "pinochio theme is playing"
+   }
     }
 
 }
